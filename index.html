@@ -1,16 +1,72 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Trooper body go</title>
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-	<link href="styles/style.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-  <h1>Trooper Test</h1>
-<h2>My top level heading</h2>
-    <img src="images/st3.PNG" alt="testing 123">
-	<P>sfsadjfksakdksakdksajdkjaksjdkjaskjd</P>
-	<script src="scripts/main.js"></script>
-  </body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Gigya Test</title>
+
+		<!-- The following script directive is included for your convenience -->
+		<!-- socialize.js script should only be included once -->
+	<script type="text/javascript" src="http://cdn.gigya.com/js/socialize.js?apiKey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N">
+			
+		 {
+        	enabledProviders: "facebook,twitter"
+    		}
+    	</script>
+	</head>
+ 
+<body >
+<script type="text/javascript" >
+    function Connect()
+    {
+        var params = {
+           "callback": onConnect,
+           "provider": "facebook",
+           cid:'',
+        };  
+        gigya.socialize.connect(params);
+    }
+ 
+    //declare the callback function in your code
+    function onConnect(response)
+    {
+        if (response.errorCode == 0) {
+ 
+            // this will inject the user name and nickname
+            document.getElementById('divUserName').innerHTML = response.user.nickname;
+ 
+            ///set the photo to image src attribute.
+            document.getElementById('imgUserPhoto').src = response.user.photoURL;
+        }
+        else {
+ 
+            //handle errors
+            alert("An error has occured!" + '\n' +
+                "Error details: " + response.errorMessage + '\n' +
+                "In method: " + response.operation);
+        }
+    }
+</script>
+  
+<div id="runningCodeExample" style="border: 1px solid skyblue; padding: 15px; width: 400px; display: block; height: auto;">
+<center>
+    <input type="button" onclick="Connect()" value="Connect to Facebook"  />
+    <div id="UserInfo">
+       <div id="divUserName"></div>
+       <div id="divUserPhoto"><img id="imgUserPhoto" src="http://wikifiles.gigya.com/transparent.GIF" onerror="this.src='transparent.GIF'"/></div>
+    </div>
+</center>
+</div>
+				
+				
+					<!-- 
+				2) After authentication, redirect to b.html
+				3) Bonus points: from the authentication response, if email is not
+				   present in the User object, prompt the user to enter an email, then
+				   redirect to b.html (no need to persist email, just ask for it)
+				   (hint: you will need to use addEventHandlers for the onLogin event)
+				4) Bonus-bonus points: show some kind of counter or flag indicating how
+				   many times the user has logged in (e.g., use a cookie or database).
+				   (You can use whatever server-side or client-side implementation you want)
+			-->
+	</body>
 </html>

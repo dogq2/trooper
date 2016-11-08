@@ -2,18 +2,63 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-		<title>Login Test</title>
+		<title>Gigya Test</title>
 
 		<!-- The following script directive is included for your convenience -->
 		<!-- socialize.js script should only be included once -->
-		<script type="text/javascript" src="http://cdn.gigya.com/js/socialize.js?apiKey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N"></script>
+	<script type="text/javascript" src="http://cdn.gigya.com/js/socialize.js?apiKey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N">
+			
+		 {
+        	enabledProviders: "facebook,twitter"
+    		}
+    	</script>
 	</head>
-
-	<body>
-			<!-- YOUR MISSION:
-				Run these pages with your favorite web server.
-								
-				1) Add the login component showLoginUI within a container
+ 
+<body >
+<script type="text/javascript" >
+    function Connect()
+    {
+        var params = {
+           "callback": onConnect,
+           "provider": "facebook",
+           cid:'',
+        };  
+        gigya.socialize.connect(params);
+    }
+ 
+    //declare the callback function in your code
+    function onConnect(response)
+    {
+        if (response.errorCode == 0) {
+ 
+            // this will inject the user name and nickname
+            document.getElementById('divUserName').innerHTML = response.user.nickname;
+ 
+            ///set the photo to image src attribute.
+            document.getElementById('imgUserPhoto').src = response.user.photoURL;
+        }
+        else {
+ 
+            //handle errors
+            alert("An error has occured!" + '\n' +
+                "Error details: " + response.errorMessage + '\n' +
+                "In method: " + response.operation);
+        }
+    }
+</script>
+  
+<div id="runningCodeExample" style="border: 1px solid skyblue; padding: 15px; width: 400px; display: block; height: auto;">
+<center>
+    <input type="button" onclick="Connect()" value="Connect to Facebook"  />
+    <div id="UserInfo">
+       <div id="divUserName"></div>
+       <div id="divUserPhoto"><img id="imgUserPhoto" src="http://wikifiles.gigya.com/transparent.GIF" onerror="this.src='transparent.GIF'"/></div>
+    </div>
+</center>
+</div>
+				
+				
+					<!-- 
 				2) After authentication, redirect to b.html
 				3) Bonus points: from the authentication response, if email is not
 				   present in the User object, prompt the user to enter an email, then
